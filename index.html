@@ -1,0 +1,508 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>碳迹·油链 —— 一滴汽油的全生命周期碳足迹智能可视化系统</title>
+  <link rel="stylesheet" href="css/style.css" />
+  <!-- ECharts 图表库（本地化，离线可用） -->
+  <script src="js/echarts.min.js"></script>
+</head>
+<body>
+
+  <!-- ======== 顶部导航 ======== -->
+  <header class="topbar">
+    <div class="topbar-inner">
+      <div class="logo">
+        <span>碳迹·油链</span>
+        <span class="logo-sub">一滴汽油的全生命周期碳足迹智能可视化系统</span>
+      </div>
+      <nav class="nav">
+        <button class="nav-btn active" data-view="home">首页总览</button>
+        <button class="nav-btn" data-view="stage">生命周期</button>
+        <button class="nav-btn" data-view="compare">燃油车 vs 电动车</button>
+        <button class="nav-btn" data-view="ai">AI 助手</button>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container">
+
+    <!-- ======== 视图1：首页总览 ======== -->
+    <section id="view-home" class="view">
+      <div class="hero">
+        <h1>一滴汽油，要走多远的路？</h1>
+        <p class="hero-sub">
+          从地下原油到机动车油箱，一滴汽油的碳足迹贯穿<span class="hl">原油开采 → 原油运输 → 炼油炼化 → 成品油配送 → 终端燃烧</span>五大环节。
+          本系统以生命周期评价（LCA）为框架，将汽油全生命周期碳排放可视化呈现。
+        </p>
+        <div class="hero-meta">
+          石油化工专业科普 · 双碳目标 · LCA 生命周期评价
+        </div>
+        <p class="hero-story">
+          <strong>这不是一个数据工具，而是一个中国故事。</strong>
+          中国是世界第二大炼油国、机动车保有量全球第一——一滴汽油的中国之旅，正是一段从"能源大国"走向"双碳强国"的时代切片。
+        </p>
+        <div class="hero-actions">
+          <button class="btn btn-primary" id="btnAbout">关于本作品</button>
+          <button class="btn btn-ghost" onclick="switchView('compare')">燃油车 vs 电动车 →</button>
+        </div>
+      </div>
+
+      <div class="card-grid">
+        <div class="card card-lg">
+          <div class="card-title">全生命周期碳足迹总量</div>
+          <div class="total-box">
+            <div class="total-head">
+              <span class="total-badge">全生命周期</span>
+              <span class="update-tag">数据更新：2026 年 10 月</span>
+            </div>
+            <div class="total-num" id="totalValue">--</div>
+            <div class="total-unit" id="totalUnit">--</div>
+          </div>
+          <p class="card-note" id="totalNote">按每升车用汽油计（科普参考值）</p>
+        </div>
+
+        <div class="card card-lg">
+          <div class="card-title">五阶段碳排放占比</div>
+          <div id="donutChart" class="chart"></div>
+        </div>
+      </div>
+
+      <div class="pivot-line">碳排在哪几步？往下看。</div>
+
+      <div class="card mb-28">
+        <div class="card-title">全生命周期碳足迹分布（每升汽油，kg CO₂e）</div>
+        <div id="flowChart" class="chart" style="height:340px"></div>
+      </div>
+
+      <div class="card">
+        <div class="card-title">五阶段碳排放趋势（每升汽油，kg CO₂e/L）</div>
+        <div id="trendChart" class="chart" style="height:300px"></div>
+        <p class="card-note">从开采到燃烧，碳排放量整体上升并主要集中于终端燃烧环节（占 82.5%）——这正是"电动化替代 + 源头减排"的减排逻辑所在。</p>
+      </div>
+
+      <div class="card mb-36">
+        <div class="card-title">一滴汽油的全生命周期旅程</div>
+        <img src="images/flow.png" class="img-fit" alt="汽油全生命周期流程图" />
+        <p class="card-note">原油开采 → 原油运输 → 炼油炼化 → 成品油配送 → 终端燃烧</p>
+      </div>
+
+      <!-- ======== 中国故事板块 ======== -->
+      <div class="card story-card mb-36">
+        <div class="card-title">一滴汽油的中国之旅 <span class="story-tag">讲好中国故事</span></div>
+        <p class="story-lead">从大庆油田的第一口油井，到加油站里的一升汽油——这滴油走过的每一步，都连着中国能源工业与双碳转型的时代脉络。</p>
+        <div class="story-grid">
+          <div class="story-node">
+            <span class="story-year">1960s —</span>
+            <p>从"洋油时代"到世界第二大炼油国：大庆油田开发、炼化工业自主崛起，一滴油有了"中国坐标"。</p>
+          </div>
+          <div class="story-node">
+            <span class="story-year">2020</span>
+            <p>中国宣布"3060"双碳目标：碳达峰、碳中和写入国家战略，能源转型按下加速键。</p>
+          </div>
+          <div class="story-node">
+            <span class="story-year">2024</span>
+            <p>GB/T 24067 产品碳足迹核算通则落地：一滴油的碳账，从"说不清"到"算得清"。</p>
+          </div>
+          <div class="story-node">
+            <span class="story-year">你我</span>
+            <p>每一次加油、每一次出行选择，都在为中国双碳故事写下自己的那一笔。</p>
+          </div>
+        </div>
+      </div>
+
+      <details class="card collapsible">
+        <summary class="card-title">我们的核算边界 <span class="collapse-hint">▼ 展开</span></summary>
+        <div class="card-body">
+          <div class="boundary-grid">
+            <div class="boundary-box include">
+              <h4>核算范围（包含）</h4>
+              <ul id="includeList"></ul>
+            </div>
+            <div class="boundary-box exclude">
+              <h4>排除范围（不纳入）</h4>
+              <ul id="excludeList"></ul>
+            </div>
+          </div>
+        </div>
+      </details>
+
+      <details class="card collapsible" open>
+        <summary class="card-title">每个环节怎么减排 <span class="collapse-hint">▲ 收起</span></summary>
+        <div class="card-body">
+          <div class="tips-grid" id="tipsGrid"></div>
+        </div>
+      </details>
+
+      <details class="card collapsible mb-36">
+        <summary class="card-title">炼化环节的 CCUS <span class="collapse-hint">▼ 展开</span></summary>
+        <div class="card-body">
+          <img src="images/ccus.png" class="img-fit" alt="CCUS 碳捕集与地下封存技术" />
+          <p class="card-note">炼油炼化与终端燃烧是汽油碳足迹两大主要排放来源；CCUS 是实现石化行业深度减排的关键路径之一。</p>
+        </div>
+      </details>
+
+      <div class="card compare-entry">
+        <div class="card-title">延伸：燃油车 vs 电动车</div>
+        <p>按中国电网平均排放因子（生态环境部 2024 年电力碳足迹因子 0.5777 kgCO₂e/kWh）估算，电动车每公里碳排放约为燃油车的一半，且随电网清洁化优势持续扩大。</p>
+        <button class="btn btn-primary" onclick="switchView('compare')">查看对比 →</button>
+      </div>
+    </section>
+
+    <!-- ======== 视图2：生命周期详情 ======== -->
+    <section id="view-stage" class="view" style="display:none">
+      <h2 class="section-title">五大生命周期环节详情</h2>
+      <div class="stage-layout">
+        <div class="stage-nav" id="stageNav"></div>
+        <div class="stage-detail card" id="stageDetail">
+          <p class="placeholder">请点击左侧选择生命周期环节</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ======== 视图3：对比页 ======== -->
+    <section id="view-compare" class="view" style="display:none">
+      <h2 class="section-title">燃油车 vs 电动车：每行驶 1 公里的碳排放</h2>
+      <div class="compare-grid">
+        <div class="card">
+          <div class="card-title">柱状对比</div>
+          <div id="compareChart" class="chart" style="height:380px"></div>
+          <p class="card-note">⚠️ 电动车按生态环境部《关于发布2024年电力碳足迹因子数据的公告》全国电力平均碳足迹因子 0.5777 kgCO₂e/kWh 估算（含发电与上游排放），数据为科普参考值。</p>
+        </div>
+        <div class="card">
+          <div class="card-title">对比结论</div>
+          <div class="conclusion-box">
+            <p><b>核心结论：</b>每行驶 1 公里，电动车（约 <span class="hl-amber">0.10</span> kg CO₂e）碳排放约为燃油车（约 <span class="hl-amber">0.21</span> kg CO₂e）的<b>一半</b>。</p>
+            <p style="margin-top:6px"><b>为什么：</b>燃油车的碳排放主要集中于<b>燃烧阶段</b>（约占全生命周期 82.5%），属"化石燃料直接排放"，几乎无法削减；电动车的碳排放主要集中于<b>发电阶段</b>，随着电网清洁化（风光水电占比提升）单位发电碳排放持续下降，电动车的优势会进一步扩大。</p>
+          </div>
+          <div class="card-title" style="margin-top:18px">对比解读</div>
+          <ul class="plain-list small-list">
+            <li><b>燃油车（汽油）</b>：每公里约 0.21 kg CO₂e，按油耗 8L/100km × 全生命周期 2.68 kgCO₂e/L 估算，包含燃料上游（开采、炼化）与终端燃烧排放，其中燃烧环节占大头。</li>
+            <li><b>电动车（电网平均）</b>：每公里约 0.10 kg CO₂e，包含发电环节与上游排放；随电网清洁化（风光水电占比提升），其排放优势还会扩大。</li>
+            <li>本对比为<b>科普参考</b>，实际数值随车型、路况、电网结构变化；不构成产品碳足迹认证结论。电动车的补能便利性与长途续航目前仍弱于燃油车，购车需结合使用场景综合判断。</li>
+          </ul>
+        </div>
+      </div>
+
+      <details class="card collapsible">
+        <summary class="card-title">多维对比雷达图 <span class="collapse-hint">▼ 展开</span></summary>
+        <div class="card-body">
+          <div id="radarChart" class="chart" style="height:360px"></div>
+          <p class="card-note">⚠️ 雷达图评分为科普定性对比（分值越高代表该项越优），用于直观展示两类车型差异，不作专业评价结论。</p>
+        </div>
+      </details>
+    </section>
+
+    <!-- ======== 视图4：AI 助手 ======== -->
+    <section id="view-ai" class="view" style="display:none">
+      <h2 class="section-title">碳足迹 AI 智能助手</h2>
+      <div class="ai-layout">
+        <!-- 功能入口（横排三个小卡片） -->
+        <div class="ai-tabs">
+          <div class="ai-tab">
+            <div class="ai-tab-title">AI 解读当前环节</div>
+            <button class="btn btn-primary" id="btnInterpret">解读当前环节</button>
+            <p class="ai-hint">基于系统数据解读当前选中的生命周期环节（默认：炼油炼化）。</p>
+          </div>
+          <div class="ai-tab">
+            <div class="ai-tab-title">AI 数据问答（自由提问）</div>
+            <textarea id="aiQuestion" rows="3" placeholder="例如：汽油哪个环节碳排放占比最高？炼化环节如何实现低碳改造？CCUS 是什么？"></textarea>
+            <button class="btn btn-primary" id="btnAsk">提问</button>
+            <p class="ai-hint">AI 仅基于本系统引用的标准与文献回答；超出知识库会明确提示。</p>
+          </div>
+          <div class="ai-tab">
+            <div class="ai-tab-title">AI 减排建议（选择场景）</div>
+            <select id="aiScene">
+              <option value="student">我是石化专业学生，想了解行业低碳转型</option>
+              <option value="driver">我是汽油车车主，想了解日常用车减排</option>
+              <option value="public">我想了解普通人可以为双碳做什么</option>
+            </select>
+            <button class="btn btn-primary" id="btnSuggest">生成建议</button>
+          </div>
+        </div>
+
+        <!-- 对话窗口（整行） -->
+        <div class="chat-panel card">
+          <div class="card-title">对话窗口</div>
+          <div class="chat-window" id="chatWindow">
+            <div class="msg ai-msg">你好！我是碳迹·油链碳足迹科普助手。你可以：点击上方"AI 解读"查看环节解读，或在输入框向我提问汽油碳足迹相关问题。</div>
+          </div>
+          <p class="ai-note">以上功能已接入真实大模型 API（阿里云百炼·通义千问 qwen-plus），基于系统知识库作答，可实时演示。</p>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+      <div>
+        <h5>AI 与数据说明</h5>
+        <p>本页面 AI 生成内容仅供科普参考，不构成专业碳足迹认证依据。</p>
+        <p>数据更新：2026 年 10 月</p>
+      </div>
+      <div>
+        <h5>数据来源</h5>
+        <p>零碳实验室《中国汽油和柴油上游排放因子（2024）》；IPCC 温室气体清单指南；上海市生态环境局《上海市温室气体排放核算和报告指南》；国家发展改革委等《炼油行业节能降碳专项行动计划》等（详见各环节数据来源弹窗）。</p>
+      </div>
+      <div>
+        <h5>核算方法</h5>
+        <p>排放因子法（活动数据 × 排放因子），依据 GB/T 24067-2024《温室气体 产品碳足迹 量化要求和指南》；国家温室气体排放因子数据库（生态环境部，2026 年第二版）。</p>
+      </div>
+      <div>
+        <h5>作品叙事</h5>
+        <p>一滴汽油的中国之旅，见证双碳时代的中国答卷。</p>
+        <p>2026 第十四届全国大学生数字媒体科技作品及创意竞赛 · 指定命题【科技+创意，讲好中国故事】</p>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2026 第十四届全国大学生数字媒体科技作品及创意竞赛参赛作品 —— 石油化工技术专业学生团队</p>
+    </div>
+  </footer>
+
+  <!-- ======== 数据来源弹窗 ======== -->
+  <div class="modal-mask" id="sourceModal" style="display:none">
+    <div class="modal">
+      <div class="modal-head">
+        <span>数据来源</span>
+        <button class="modal-close" id="modalClose">×</button>
+      </div>
+      <div class="modal-body" id="modalBody"></div>
+    </div>
+  </div>
+
+  <!-- ======== 关于本作品弹窗 ======== -->
+  <div class="modal-mask" id="aboutModal" style="display:none">
+    <div class="modal">
+      <div class="modal-head">
+        <span>关于本作品</span>
+        <button class="modal-close" id="aboutClose">×</button>
+      </div>
+      <div class="modal-body">
+        <p><b>作品名称：</b>碳迹·油链——一滴汽油的全生命周期碳足迹智能可视化系统</p>
+        <p><b>参赛赛道：</b>2026 第十四届全国大学生数字媒体科技作品及创意竞赛 · 指定命题【科技+创意，讲好中国故事】</p>
+        <p><b>团队：</b>甘肃有色冶金职业技术学院 —— 杨德运（石油化工技术）、孟玉如、乔嘉悦（应用化工）；指导教师：陈卫东、陈艳丽</p>
+        <p><b>作品简介：</b>以"一滴汽油"为线索，通过可交互数据可视化与 AI 科普助手，呈现汽油从原油开采到终端燃烧的全生命周期碳足迹，让"双碳"目标可知、可感、可参与。</p>
+        <p style="margin-top:10px"><b>中国故事视角：</b>本作品以"一滴汽油"为叙事线索，讲述中国从能源大国迈向绿色强国的转型故事——从世界第二大炼油国的产业坐标，到"3060"双碳承诺，再到碳足迹核算标准的中国落地，让每一个普通人看到：中国双碳故事，也是"我"的故事。</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- 数据与逻辑 -->
+  <script src="js/data.js"></script>
+  <script src="js/charts.js"></script>
+  <script src="js/ai.js"></script>
+  <script>
+    /* ========== 导航切换 ========== */
+    const views = document.querySelectorAll(".view");
+    const navBtns = document.querySelectorAll(".nav-btn");
+
+    function switchView(viewId) {
+      views.forEach((v) => (v.style.display = v.id === "view-" + viewId ? "block" : "none"));
+      navBtns.forEach((b) => b.classList.toggle("active", b.dataset.view === viewId));
+      // 切到含图表的视图时刷新尺寸（确保隐藏容器重新测量）
+      setTimeout(() => window.dispatchEvent(new Event("resize")), 120);
+    }
+    navBtns.forEach((b) => b.addEventListener("click", () => switchView(b.dataset.view)));
+
+    /* ========== 折叠卡 展开/收起 提示切换 ========== */
+    document.querySelectorAll("details.collapsible").forEach((d) => {
+      const hint = d.querySelector(".collapse-hint");
+      d.addEventListener("toggle", () => {
+        hint.textContent = d.open ? "▲ 收起" : "▼ 展开";
+        // 折叠卡内可能含图表（如对比页雷达图），展开后重算尺寸
+        setTimeout(() => window.dispatchEvent(new Event("resize")), 60);
+      });
+    });
+
+    /* ========== 首页渲染 ========== */
+    function renderHome() {
+      document.getElementById("totalValue").textContent = LCA_DATA.totalLabel;
+      document.getElementById("totalUnit").textContent = "kg CO₂e / L";
+      document.getElementById("totalNote").textContent =
+        "按" + LCA_DATA.product + "计（科普参考值）";
+
+      renderDonut("donutChart");
+      renderFlow("flowChart");
+      renderTrend("trendChart");
+
+      const incList = document.getElementById("includeList");
+      LCA_DATA.boundary.include.forEach((t) => {
+        const li = document.createElement("li");
+        li.textContent = t;
+        incList.appendChild(li);
+      });
+      const excList = document.getElementById("excludeList");
+      LCA_DATA.boundary.exclude.forEach((t) => {
+        const li = document.createElement("li");
+        li.textContent = t;
+        excList.appendChild(li);
+      });
+
+      const tips = document.getElementById("tipsGrid");
+      LCA_DATA.stages.forEach((s) => {
+        const box = document.createElement("div");
+        box.className = "tip-box";
+        box.innerHTML =
+          "<h4>" + s.name + "</h4><ul>" +
+          s.keyPoints.map((k) => "<li>" + k + "</li>").join("") +
+          "</ul>";
+        tips.appendChild(box);
+      });
+    }
+    renderHome();
+
+    /* ========== 生命周期详情页 ========== */
+    let currentStageId = "refining"; // 当前选中环节（AI 解读默认用）
+
+    function renderStageNav() {
+      const nav = document.getElementById("stageNav");
+      nav.innerHTML = ""; // 先清空，避免重复点击时环节按钮累加
+      LCA_DATA.stages.forEach((s) => {
+        const btn = document.createElement("button");
+        btn.className = "stage-btn" + (s.id === currentStageId ? " active" : "");
+        const idx = LCA_DATA.stages.indexOf(s) + 1;
+        btn.innerHTML = "<span class='stage-icon'>" + String(idx).padStart(2, "0") + "</span>" +
+          "<span>" + s.name + "</span><span class='stage-pct'>" + s.proportion + "%</span>";
+        btn.addEventListener("click", () => {
+          currentStageId = s.id;
+          renderStageNav();
+          renderStageDetail(s);
+        });
+        nav.appendChild(btn);
+      });
+    }
+
+    function renderStageDetail(stage) {
+      const detail = document.getElementById("stageDetail");
+      detail.innerHTML = "";
+      let imgHtml = "";
+      if (stage.id === "exploration") {
+        imgHtml = "<img src='images/exploration.png' class='img-fit' alt='原油开采场景'>";
+      } else if (stage.id === "refining") {
+        imgHtml = "<img src='images/refining.png' class='img-fit' alt='炼油常减压蒸馏工艺'>";
+      } else if (stage.id === "distribution") {
+        imgHtml = "<img src='images/distribution.png' class='img-fit' alt='成品油油罐车配送'>";
+      } else if (stage.id === "combustion") {
+        imgHtml = "<img src='images/combustion.png' class='img-fit' alt='机动车终端燃烧与尾气排放'>";
+      }
+      detail.innerHTML =
+        "<h3>" + stage.name + "（占全生命周期 " + stage.proportion + "%）</h3>" +
+        "<div class='stage-detail-grid'>" +
+        "<div class='stage-img'>" + imgHtml + "</div>" +
+        "<div class='stage-text'>" +
+        "<div id='stageBarChart' class='chart' style='height:280px'></div>" +
+        "<h4>环节说明</h4><p>" + stage.description + "</p>" +
+        "<h4>关键要点</h4><ul class='plain-list'>" +
+        stage.keyPoints.map((k) => "<li>" + k + "</li>").join("") + "</ul>" +
+        "<div class='source-row'><span>碳排放量：约 " + stage.emission.toFixed(2) + " kg CO₂e/L</span>" +
+        "<button class='btn btn-sm' data-source='" + stage.name + "|" + stage.source + "'>查看数据来源</button></div>" +
+        "<div class='source-row'><span>想知道这个环节怎么减排？</span>" +
+        "<button class='btn btn-sm btn-ghost' data-ai-suggest='" + stage.id + "'>AI 减排建议</button></div>" +
+        "</div></div>";
+
+      renderStageBar("stageBarChart", stage.id);
+      detail.querySelector("[data-source]").addEventListener("click", (e) => {
+        const [name, src] = e.target.dataset.source.split("|");
+        openSourceModal(name, src);
+      });
+      detail.querySelector("[data-ai-suggest]").addEventListener("click", (e) => {
+        const stageId = e.target.dataset.aiSuggest;
+        const s = LCA_DATA.stages.find((x) => x.id === stageId);
+        switchView("ai");
+        appendMsg("user", "请针对「" + s.name + "」环节给出减排建议。");
+        runAI(() => AIService.suggestStage(stageId));
+      });
+    }
+    renderStageNav();
+    renderStageDetail(LCA_DATA.stages.find((s) => s.id === currentStageId));
+
+    /* ========== 对比页 ========== */
+    renderCompare("compareChart");
+    renderRadar("radarChart");
+
+    /* ========== 数据来源弹窗 ========== */
+    function openSourceModal(name, source) {
+      document.getElementById("modalBody").innerHTML =
+        "<p><b>环节：</b>" + name + "</p>" +
+        "<p><b>数据来源：</b>" + source + "</p>" +
+        "<p><b>核算方法：</b>排放因子法（活动数据 × 排放因子），依据 GB/T 24067-2024《温室气体 产品碳足迹 量化要求和指南》；燃烧环节另经上海市生态环境局《上海市温室气体排放核算和报告指南》交叉验证（差异 &lt;3%）。</p>" +
+        "<p class='card-note'>⚠️ 本系统数据为科普参考值，来源为公开标准与文献；正式用途请以权威机构发布数据为准。</p>";
+      document.getElementById("sourceModal").style.display = "flex";
+    }
+    document.getElementById("modalClose").addEventListener("click", () => {
+      document.getElementById("sourceModal").style.display = "none";
+    });
+    document.getElementById("sourceModal").addEventListener("click", (e) => {
+      if (e.target.id === "sourceModal") document.getElementById("sourceModal").style.display = "none";
+    });
+
+    /* ========== 关于本作品弹窗 ========== */
+    document.getElementById("btnAbout").addEventListener("click", () => {
+      document.getElementById("aboutModal").style.display = "flex";
+    });
+    document.getElementById("aboutClose").addEventListener("click", () => {
+      document.getElementById("aboutModal").style.display = "none";
+    });
+    document.getElementById("aboutModal").addEventListener("click", (e) => {
+      if (e.target.id === "aboutModal") document.getElementById("aboutModal").style.display = "none";
+    });
+
+    /* ========== AI 助手 ========== */
+    const chatWindow = document.getElementById("chatWindow");
+
+    function appendMsg(role, text) {
+      const div = document.createElement("div");
+      div.className = "msg " + (role === "user" ? "user-msg" : "ai-msg");
+      div.textContent = text;
+      chatWindow.appendChild(div);
+      chatWindow.scrollTop = chatWindow.scrollHeight;
+    }
+
+    function appendTyping() {
+      const div = document.createElement("div");
+      div.className = "msg ai-msg typing";
+      div.textContent = "AI 正在思考…";
+      chatWindow.appendChild(div);
+      chatWindow.scrollTop = chatWindow.scrollHeight;
+      return div;
+    }
+
+    async function runAI(task) {
+      const typing = appendTyping();
+      try {
+        const answer = await task();
+        typing.textContent = answer;
+      } catch (err) {
+        typing.textContent = "⚠️ " + err.message;
+      }
+      typing.classList.remove("typing");
+    }
+
+    // AI 解读当前环节
+    document.getElementById("btnInterpret").addEventListener("click", () => {
+      const stage = LCA_DATA.stages.find((s) => s.id === currentStageId);
+      appendMsg("user", "请解读「" + stage.name + "」环节的碳足迹。");
+      runAI(() => AIService.interpret(currentStageId));
+    });
+
+    // ② AI 问答
+    document.getElementById("btnAsk").addEventListener("click", () => {
+      const q = document.getElementById("aiQuestion").value.trim();
+      if (!q) { appendMsg("ai-msg", "请输入你要咨询的问题。"); return; }
+      appendMsg("user", q);
+      runAI(() => AIService.ask(q));
+      document.getElementById("aiQuestion").value = "";
+    });
+
+    // ③ AI 减排建议
+    document.getElementById("btnSuggest").addEventListener("click", () => {
+      const scene = document.getElementById("aiScene").value;
+      const sceneLabel = document.getElementById("aiScene").selectedOptions[0].text;
+      appendMsg("user", "请针对场景生成减排建议：" + sceneLabel);
+      runAI(() => AIService.suggest(scene));
+    });
+  </script>
+</body>
+</html>
