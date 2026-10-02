@@ -900,3 +900,146 @@ body {
   text-align: center;
   padding: 60px 0;
 }
+
+/* ============================================================
+ * 首页叙事流（一滴汽油的中国之旅 · 七幕）
+ * ============================================================ */
+.hero-actions a.btn {
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* 章节卡 */
+.act-card {
+  border-left: 4px solid var(--primary-light);
+  margin-bottom: 24px;
+}
+
+.act-card h3 {
+  font-size: 20px;
+  color: var(--primary-deep);
+  margin: 8px 0 10px;
+}
+
+.act-lead {
+  font-size: 15px;
+  color: var(--text);
+  line-height: 1.95;
+  margin-bottom: 8px;
+}
+
+.act-tag {
+  display: inline-block;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  color: #fff;
+  background: linear-gradient(135deg, #0a5f68, #3a94a0);
+  border-radius: 20px;
+  padding: 3px 16px;
+  margin-bottom: 4px;
+}
+
+/* 章节图文对（图左文右，第二幕左右可交替） */
+.act-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 1.5fr;
+  gap: 22px;
+  align-items: center;
+  margin-top: 10px;
+}
+
+.act-img .img-fit {
+  margin: 0;
+}
+
+.act-body p {
+  font-size: 14px;
+  color: var(--text-sub);
+  line-height: 1.9;
+  margin-bottom: 10px;
+}
+
+@media (max-width: 900px) {
+  .act-grid { grid-template-columns: 1fr; }
+}
+
+/* 章节内迷你数据条 */
+.mini-stat {
+  display: inline-block;
+  font-size: 13px;
+  color: var(--text);
+  background: #eef7f5;
+  border: 1px solid #cfe6e0;
+  border-radius: 10px;
+  padding: 8px 14px;
+  margin-bottom: 12px;
+  line-height: 1.6;
+}
+
+.mini-num {
+  font-weight: 800;
+  color: var(--primary);
+}
+
+/* 转折幕 */
+.act-turn {
+  border-left-color: var(--amber);
+  background: linear-gradient(180deg, #fdfcf9 0%, #fff 100%);
+}
+
+.act-turn .act-tag {
+  background: linear-gradient(135deg, #a8763e, #d3a25e);
+}
+
+.big-num {
+  font-size: 22px;
+  color: var(--primary);
+}
+
+.turn-timeline {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 14px;
+  margin-top: 16px;
+}
+
+.turn-node {
+  border: 1px solid var(--border);
+  border-top: 3px solid var(--accent);
+  border-radius: 12px;
+  background: #fff;
+  padding: 12px 14px;
+}
+
+.turn-node p {
+  font-size: 13px;
+  color: var(--text-sub);
+  line-height: 1.7;
+  margin-top: 4px;
+}
+
+.turn-year {
+  font-size: 15px;
+  font-weight: 800;
+  color: var(--primary);
+}
+
+/* 落点幕 */
+.act-final {
+  border-left-color: var(--accent);
+  background: linear-gradient(135deg, #f2faf8 0%, #fff 100%);
+}
+
+.final-actions {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-top: 14px;
+}
+
+.final-actions a.btn {
+  text-decoration: none;
+}

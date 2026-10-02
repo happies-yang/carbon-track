@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>碳迹·油链 —— 一滴汽油的全生命周期碳足迹智能可视化系统</title>
+  <title>碳迹·油链 —— 一滴汽油的中国之旅 · 全生命周期碳足迹智能可视化系统</title>
   <link rel="stylesheet" href="css/style.css" />
   <!-- ECharts 图表库（本地化，离线可用） -->
   <script src="js/echarts.min.js"></script>
@@ -15,7 +15,7 @@
     <div class="topbar-inner">
       <div class="logo">
         <span>碳迹·油链</span>
-        <span class="logo-sub">一滴汽油的全生命周期碳足迹智能可视化系统</span>
+        <span class="logo-sub">一滴汽油的中国之旅 · 全生命周期碳足迹可视化</span>
       </div>
       <nav class="nav">
         <button class="nav-btn active" data-view="home">首页总览</button>
@@ -28,26 +28,111 @@
 
   <main class="container">
 
-    <!-- ======== 视图1：首页总览 ======== -->
+    <!-- ============================================================
+         视图1：首页 —— 一滴汽油的中国之旅（七幕叙事流）
+         ============================================================ -->
     <section id="view-home" class="view">
-      <div class="hero">
-        <h1>一滴汽油，要走多远的路？</h1>
+
+      <!-- 序幕 · Hero -->
+      <div class="hero story-hero">
+        <h1>一滴汽油的中国之旅</h1>
         <p class="hero-sub">
-          从地下原油到机动车油箱，一滴汽油的碳足迹贯穿<span class="hl">原油开采 → 原油运输 → 炼油炼化 → 成品油配送 → 终端燃烧</span>五大环节。
-          本系统以生命周期评价（LCA）为框架，将汽油全生命周期碳排放可视化呈现。
+          从地下油田到加油站，一滴汽油走过的每一步，都是中国能源工业与双碳转型的时代注脚。
+          它穿过<span class="hl">原油开采 → 原油运输 → 炼油炼化 → 成品油配送 → 终端燃烧</span>五个环节，
+          也穿过了新中国从"贫油国"走向"能源大国"、迈向"双碳强国"的七十余年。
         </p>
         <div class="hero-meta">
-          石油化工专业科普 · 双碳目标 · LCA 生命周期评价
+          讲好中国故事 · 石油化工专业科普 · LCA 生命周期评价 · 双碳目标
         </div>
-        <p class="hero-story">
-          <strong>这不是一个数据工具，而是一个中国故事。</strong>
-          中国是世界第二大炼油国、机动车保有量全球第一——一滴汽油的中国之旅，正是一段从"能源大国"走向"双碳强国"的时代切片。
-        </p>
         <div class="hero-actions">
           <button class="btn btn-primary" id="btnAbout">关于本作品</button>
-          <button class="btn btn-ghost" onclick="switchView('compare')">燃油车 vs 电动车 →</button>
+          <a class="btn btn-ghost" href="#act-start">开始旅程 ↓</a>
         </div>
       </div>
+
+      <!-- 序幕 · 一滴油 -->
+      <div class="card act-card" id="act-start">
+        <div class="act-tag">序幕 · 一滴油</div>
+        <h3>你加满一箱油的时候，可曾想过——这一升汽油，刚刚走过怎样的一段中国旅程？</h3>
+        <p class="act-lead">
+          它从地下数千米的油藏出发，经管道与油轮穿越山海，在千万吨级炼厂里历经蒸馏与催化，
+          再由油罐车送到你身边——最后，在发动机里完成一次燃烧，把能量交给道路，把二氧化碳交给天空。
+        </p>
+        <p class="act-lead">
+          这五个环节，横跨数千公里，牵动中国能源版图，也写下了一段"从石油到碳足迹"的时代叙事。
+        </p>
+      </div>
+
+      <!-- 第一幕 · 地下的中国 -->
+      <div class="card act-card act-alt">
+        <div class="act-tag">第一幕 · 地下的中国</div>
+        <div class="act-grid">
+          <div class="act-img"><img src="images/exploration.png" class="img-fit" alt="原油开采场景" /></div>
+          <div class="act-body">
+            <h3>从"贫油国"到大油田</h3>
+            <p>六十多年前，中国曾被断言"贫油"。大庆油田的开发让共和国甩掉了这顶帽子；此后胜利、塔里木、海上油田相继建成，
+              中国成长为世界第二大炼油国。一滴原油的旅程，从这里开始。</p>
+            <div class="mini-stat">
+              <span class="mini-num">0.20 kg CO₂e/L</span> 原油开采阶段碳足迹 · 占全生命周期 <b>7.5%</b>
+            </div>
+            <button class="btn btn-sm" data-source="原油开采|零碳实验室《中国汽油和柴油上游排放因子》GHG S3.3（2024）：原油开采排放因子（含甲烷逸散、开采能耗）；IPCC《2006 国家温室气体清单指南》">查看数据来源</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- 第二幕 · 路上的中国 -->
+      <div class="card act-card">
+        <div class="act-tag">第二幕 · 路上的中国</div>
+        <div class="act-grid">
+          <div class="act-img"><img src="images/refining.png" class="img-fit" alt="炼油常减压蒸馏工艺" /></div>
+          <div class="act-body">
+            <h3>能源动脉与千万吨级炼厂</h3>
+            <p>中哈原油管道、海上油轮、纵横的管网——原油跨越数千公里来到炼厂；常减压蒸馏、催化裂化、重整，
+              中国炼化工业用世界级的规模，把原油变成汽油。这是"路上的中国"：运输 + 炼化，占碳足迹不到一成，却是故事里不可缺的一环。</p>
+            <div class="mini-stat">
+              原油运输 <b>0.04 kg · 1.3%</b> ｜ 炼油炼化 <b>0.22 kg · 8.2%</b> kg CO₂e/L
+            </div>
+            <button class="btn btn-sm" data-source="原油运输|零碳实验室《中国汽油和柴油上游排放因子》GHG S3.3（2024）：运输环节排放因子（管道/海运能耗）；炼油炼化|零碳实验室 GHG S3.3（2024）炼化排放因子（加热能耗、制氢排放）">查看数据来源</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- 第三幕 · 燃烧的时代 -->
+      <div class="card act-card act-alt">
+        <div class="act-tag">第三幕 · 燃烧的时代</div>
+        <div class="act-grid">
+          <div class="act-img"><img src="images/combustion.png" class="img-fit" alt="机动车终端燃烧与尾气排放" /></div>
+          <div class="act-body">
+            <h3>保有量全球第一的"燃烧的时代"</h3>
+            <p>中国机动车保有量居世界前列，数亿辆汽车每天在路上燃烧汽油。终端燃烧贡献了这滴油 <b>82.5%</b> 的碳足迹——
+              它既是故事的高潮，也是减排的主战场。</p>
+            <div class="mini-stat">
+              <span class="mini-num">2.21 kg CO₂e/L</span> 终端燃烧阶段碳足迹 · 占全生命周期 <b>82.5%</b>
+            </div>
+            <button class="btn btn-sm" data-source="终端燃烧|IPCC 2006 温室气体清单指南：汽油燃烧 CO₂ 排放因子（约 2.21 kg CO₂e/L）；上海市生态环境局《上海市温室气体排放核算和报告指南》交叉验证（差异<3%）">查看数据来源</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- 转折 · 算得清 -->
+      <div class="card act-card act-turn">
+        <div class="act-tag">转折 · 算得清</div>
+        <h3>从"说不清"到"算得清"</h3>
+        <p class="act-lead">
+          过去，一滴汽油到底排放多少碳，"说不清"。2020 年，中国宣布"3060"双碳目标；
+          2024 年，GB/T 24067《产品碳足迹核算通则》落地——中国的碳账，第一次有了全国统一的标准算法。
+          这滴油的全生命周期碳足迹：<b class="big-num">2.68 kg CO₂e/L</b>。
+        </p>
+        <div class="turn-timeline">
+          <div class="turn-node"><span class="turn-year">1960s</span><p>甩掉"贫油国"帽子，炼化工业自主崛起</p></div>
+          <div class="turn-node"><span class="turn-year">2020</span><p>中国宣布碳达峰、碳中和"3060"目标</p></div>
+          <div class="turn-node"><span class="turn-year">2024</span><p>GB/T 24067 产品碳足迹核算通则发布</p></div>
+          <div class="turn-node"><span class="turn-year">今天</span><p>一滴油的碳账，终于"算得清、看得见"</p></div>
+        </div>
+      </div>
+
+      <!-- 证据 · 数据会说话 -->
+      <div class="pivot-line">故事讲完了，证据在这里——数据会说话。</div>
 
       <div class="card-grid">
         <div class="card card-lg">
@@ -69,48 +154,39 @@
         </div>
       </div>
 
-      <div class="pivot-line">碳排在哪几步？往下看。</div>
-
       <div class="card mb-28">
         <div class="card-title">全生命周期碳足迹分布（每升汽油，kg CO₂e）</div>
         <div id="flowChart" class="chart" style="height:340px"></div>
       </div>
 
-      <div class="card">
+      <div class="card mb-36">
         <div class="card-title">五阶段碳排放趋势（每升汽油，kg CO₂e/L）</div>
         <div id="trendChart" class="chart" style="height:300px"></div>
         <p class="card-note">从开采到燃烧，碳排放量整体上升并主要集中于终端燃烧环节（占 82.5%）——这正是"电动化替代 + 源头减排"的减排逻辑所在。</p>
       </div>
 
-      <div class="card mb-36">
-        <div class="card-title">一滴汽油的全生命周期旅程</div>
-        <img src="images/flow.png" class="img-fit" alt="汽油全生命周期流程图" />
-        <p class="card-note">原油开采 → 原油运输 → 炼油炼化 → 成品油配送 → 终端燃烧</p>
-      </div>
-
-      <!-- ======== 中国故事板块 ======== -->
-      <div class="card story-card mb-36">
-        <div class="card-title">一滴汽油的中国之旅 <span class="story-tag">讲好中国故事</span></div>
-        <p class="story-lead">从大庆油田的第一口油井，到加油站里的一升汽油——这滴油走过的每一步，都连着中国能源工业与双碳转型的时代脉络。</p>
-        <div class="story-grid">
-          <div class="story-node">
-            <span class="story-year">1960s —</span>
-            <p>从"洋油时代"到世界第二大炼油国：大庆油田开发、炼化工业自主崛起，一滴油有了"中国坐标"。</p>
-          </div>
-          <div class="story-node">
-            <span class="story-year">2020</span>
-            <p>中国宣布"3060"双碳目标：碳达峰、碳中和写入国家战略，能源转型按下加速键。</p>
-          </div>
-          <div class="story-node">
-            <span class="story-year">2024</span>
-            <p>GB/T 24067 产品碳足迹核算通则落地：一滴油的碳账，从"说不清"到"算得清"。</p>
-          </div>
-          <div class="story-node">
-            <span class="story-year">你我</span>
-            <p>每一次加油、每一次出行选择，都在为中国双碳故事写下自己的那一笔。</p>
-          </div>
+      <!-- 落点 · 你我参与 -->
+      <div class="card act-card act-final mb-36">
+        <div class="act-tag">落点 · 你我参与</div>
+        <h3>中国双碳故事，也是"我"的故事</h3>
+        <p class="act-lead">
+          每一次加油、每一次出行选择，都在为这个故事落笔。
+          想为它写"减排"这一笔？往下看。
+        </p>
+        <div class="final-actions">
+          <a class="btn btn-primary" href="#reduce">了解每个环节怎么减排</a>
+          <button class="btn btn-ghost" onclick="switchView('compare')">燃油车 vs 电动车 →</button>
+          <button class="btn btn-ghost" onclick="switchView('ai')">问问 AI 助手 →</button>
         </div>
       </div>
+
+      <!-- 减排速览（默认展开） -->
+      <details class="card collapsible" id="reduce" open>
+        <summary class="card-title">每个环节怎么减排 <span class="collapse-hint">▲ 收起</span></summary>
+        <div class="card-body">
+          <div class="tips-grid" id="tipsGrid"></div>
+        </div>
+      </details>
 
       <details class="card collapsible">
         <summary class="card-title">我们的核算边界 <span class="collapse-hint">▼ 展开</span></summary>
@@ -128,13 +204,6 @@
         </div>
       </details>
 
-      <details class="card collapsible" open>
-        <summary class="card-title">每个环节怎么减排 <span class="collapse-hint">▲ 收起</span></summary>
-        <div class="card-body">
-          <div class="tips-grid" id="tipsGrid"></div>
-        </div>
-      </details>
-
       <details class="card collapsible mb-36">
         <summary class="card-title">炼化环节的 CCUS <span class="collapse-hint">▼ 展开</span></summary>
         <div class="card-body">
@@ -143,16 +212,17 @@
         </div>
       </details>
 
-      <div class="card compare-entry">
+      <div class="card compare-entry mb-36">
         <div class="card-title">延伸：燃油车 vs 电动车</div>
         <p>按中国电网平均排放因子（生态环境部 2024 年电力碳足迹因子 0.5777 kgCO₂e/kWh）估算，电动车每公里碳排放约为燃油车的一半，且随电网清洁化优势持续扩大。</p>
         <button class="btn btn-primary" onclick="switchView('compare')">查看对比 →</button>
       </div>
+
     </section>
 
-    <!-- ======== 视图2：生命周期详情 ======== -->
+    <!-- ======== 视图2：生命周期详情（证据库） ======== -->
     <section id="view-stage" class="view" style="display:none">
-      <h2 class="section-title">五大生命周期环节详情</h2>
+      <h2 class="section-title">证据库 · 五大生命周期环节详情</h2>
       <div class="stage-layout">
         <div class="stage-nav" id="stageNav"></div>
         <div class="stage-detail card" id="stageDetail">
@@ -161,9 +231,9 @@
       </div>
     </section>
 
-    <!-- ======== 视图3：对比页 ======== -->
+    <!-- ======== 视图3：对比页（证据库） ======== -->
     <section id="view-compare" class="view" style="display:none">
-      <h2 class="section-title">燃油车 vs 电动车：每行驶 1 公里的碳排放</h2>
+      <h2 class="section-title">证据库 · 燃油车 vs 电动车：每行驶 1 公里的碳排放</h2>
       <div class="compare-grid">
         <div class="card">
           <div class="card-title">柱状对比</div>
@@ -194,9 +264,9 @@
       </details>
     </section>
 
-    <!-- ======== 视图4：AI 助手 ======== -->
+    <!-- ======== 视图4：AI 助手（故事解说员） ======== -->
     <section id="view-ai" class="view" style="display:none">
-      <h2 class="section-title">碳足迹 AI 智能助手</h2>
+      <h2 class="section-title">故事解说员 · 碳足迹 AI 智能助手</h2>
       <div class="ai-layout">
         <!-- 功能入口（横排三个小卡片） -->
         <div class="ai-tabs">
@@ -226,9 +296,9 @@
         <div class="chat-panel card">
           <div class="card-title">对话窗口</div>
           <div class="chat-window" id="chatWindow">
-            <div class="msg ai-msg">你好！我是碳迹·油链碳足迹科普助手。你可以：点击上方"AI 解读"查看环节解读，或在输入框向我提问汽油碳足迹相关问题。</div>
+            <div class="msg ai-msg">你好！我是碳迹·油链碳足迹科普助手。这滴汽油的中国之旅里，你想知道哪个环节的故事？点击上方"AI 解读"查看环节解读，或向我提问汽油碳足迹相关问题。</div>
           </div>
-          <p class="ai-note">以上功能已接入真实大模型 API（阿里云百炼·通义千问 qwen-plus），基于系统知识库作答，可实时演示。</p>
+          <p class="ai-note">以上功能已接入真实大模型 API（阿里云百炼·通义千问 qwen-plus），基于系统知识库作答，可实时演示。AI 生成内容已标注（AI 生成）。</p>
         </div>
       </div>
     </section>
@@ -280,11 +350,11 @@
         <button class="modal-close" id="aboutClose">×</button>
       </div>
       <div class="modal-body">
-        <p><b>作品名称：</b>碳迹·油链——一滴汽油的全生命周期碳足迹智能可视化系统</p>
+        <p><b>作品名称：</b>碳迹·油链——一滴汽油的中国之旅 · 全生命周期碳足迹智能可视化系统</p>
         <p><b>参赛赛道：</b>2026 第十四届全国大学生数字媒体科技作品及创意竞赛 · 指定命题【科技+创意，讲好中国故事】</p>
         <p><b>团队：</b>甘肃有色冶金职业技术学院 —— 杨德运（石油化工技术）、孟玉如、乔嘉悦（应用化工）；指导教师：陈卫东、陈艳丽</p>
-        <p><b>作品简介：</b>以"一滴汽油"为线索，通过可交互数据可视化与 AI 科普助手，呈现汽油从原油开采到终端燃烧的全生命周期碳足迹，让"双碳"目标可知、可感、可参与。</p>
-        <p style="margin-top:10px"><b>中国故事视角：</b>本作品以"一滴汽油"为叙事线索，讲述中国从能源大国迈向绿色强国的转型故事——从世界第二大炼油国的产业坐标，到"3060"双碳承诺，再到碳足迹核算标准的中国落地，让每一个普通人看到：中国双碳故事，也是"我"的故事。</p>
+        <p><b>作品简介：</b>以"一滴汽油"为叙事线索，讲述中国从能源大国迈向绿色强国的转型故事——从世界第二大炼油国的产业坐标，到"3060"双碳承诺，再到碳足迹核算标准的中国落地，用可交互数据可视化与 AI 科普助手，让"双碳"目标可知、可感、可参与。</p>
+        <p style="margin-top:10px"><b>中国故事视角：</b>一滴油的地下之旅、路上之旅、燃烧之旅，与中国能源工业的崛起同频；每一次加油、每一次出行选择，都在为中国双碳故事写下自己的那一笔。</p>
       </div>
     </div>
   </div>
@@ -316,7 +386,7 @@
       });
     });
 
-    /* ========== 首页渲染 ========== */
+    /* ========== 首页渲染（证据幕数据） ========== */
     function renderHome() {
       document.getElementById("totalValue").textContent = LCA_DATA.totalLabel;
       document.getElementById("totalUnit").textContent = "kg CO₂e / L";
@@ -353,7 +423,41 @@
     }
     renderHome();
 
-    /* ========== 生命周期详情页 ========== */
+    /* ========== 数据来源弹窗（首页章节按钮共用） ========== */
+    function openSourceModal(name, source) {
+      document.getElementById("modalBody").innerHTML =
+        "<p><b>环节：</b>" + name + "</p>" +
+        "<p><b>数据来源：</b>" + source + "</p>" +
+        "<p><b>核算方法：</b>排放因子法（活动数据 × 排放因子），依据 GB/T 24067-2024《温室气体 产品碳足迹 量化要求和指南》；燃烧环节另经上海市生态环境局《上海市温室气体排放核算和报告指南》交叉验证（差异 &lt;3%）。</p>" +
+        "<p class='card-note'>⚠️ 本系统数据为科普参考值，来源为公开标准与文献；正式用途请以权威机构发布数据为准。</p>";
+      document.getElementById("sourceModal").style.display = "flex";
+    }
+    // 首页章节"查看数据来源"按钮
+    document.querySelectorAll("[data-source]").forEach((btn) => {
+      btn.addEventListener("click", (e) => {
+        const [name, src] = e.target.dataset.source.split("|");
+        openSourceModal(name, src);
+      });
+    });
+    document.getElementById("modalClose").addEventListener("click", () => {
+      document.getElementById("sourceModal").style.display = "none";
+    });
+    document.getElementById("sourceModal").addEventListener("click", (e) => {
+      if (e.target.id === "sourceModal") document.getElementById("sourceModal").style.display = "none";
+    });
+
+    /* ========== 关于本作品弹窗 ========== */
+    document.getElementById("btnAbout").addEventListener("click", () => {
+      document.getElementById("aboutModal").style.display = "flex";
+    });
+    document.getElementById("aboutClose").addEventListener("click", () => {
+      document.getElementById("aboutModal").style.display = "none";
+    });
+    document.getElementById("aboutModal").addEventListener("click", (e) => {
+      if (e.target.id === "aboutModal") document.getElementById("aboutModal").style.display = "none";
+    });
+
+    /* ========== 生命周期详情页（证据库） ========== */
     let currentStageId = "refining"; // 当前选中环节（AI 解读默认用）
 
     function renderStageNav() {
@@ -418,38 +522,11 @@
     renderStageNav();
     renderStageDetail(LCA_DATA.stages.find((s) => s.id === currentStageId));
 
-    /* ========== 对比页 ========== */
+    /* ========== 对比页（证据库） ========== */
     renderCompare("compareChart");
     renderRadar("radarChart");
 
-    /* ========== 数据来源弹窗 ========== */
-    function openSourceModal(name, source) {
-      document.getElementById("modalBody").innerHTML =
-        "<p><b>环节：</b>" + name + "</p>" +
-        "<p><b>数据来源：</b>" + source + "</p>" +
-        "<p><b>核算方法：</b>排放因子法（活动数据 × 排放因子），依据 GB/T 24067-2024《温室气体 产品碳足迹 量化要求和指南》；燃烧环节另经上海市生态环境局《上海市温室气体排放核算和报告指南》交叉验证（差异 &lt;3%）。</p>" +
-        "<p class='card-note'>⚠️ 本系统数据为科普参考值，来源为公开标准与文献；正式用途请以权威机构发布数据为准。</p>";
-      document.getElementById("sourceModal").style.display = "flex";
-    }
-    document.getElementById("modalClose").addEventListener("click", () => {
-      document.getElementById("sourceModal").style.display = "none";
-    });
-    document.getElementById("sourceModal").addEventListener("click", (e) => {
-      if (e.target.id === "sourceModal") document.getElementById("sourceModal").style.display = "none";
-    });
-
-    /* ========== 关于本作品弹窗 ========== */
-    document.getElementById("btnAbout").addEventListener("click", () => {
-      document.getElementById("aboutModal").style.display = "flex";
-    });
-    document.getElementById("aboutClose").addEventListener("click", () => {
-      document.getElementById("aboutModal").style.display = "none";
-    });
-    document.getElementById("aboutModal").addEventListener("click", (e) => {
-      if (e.target.id === "aboutModal") document.getElementById("aboutModal").style.display = "none";
-    });
-
-    /* ========== AI 助手 ========== */
+    /* ========== AI 助手（故事解说员） ========== */
     const chatWindow = document.getElementById("chatWindow");
 
     function appendMsg(role, text) {
