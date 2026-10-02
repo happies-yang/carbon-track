@@ -1049,3 +1049,28 @@ body {
 .final-actions a.btn {
   text-decoration: none;
 }
+
+/* ---------- 落点幕 · 传播场景 ---------- */
+.act-scenes {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px;
+  margin: 6px 0 4px;
+}
+
+.scene-chip {
+  background: rgba(139, 200, 234, 0.12);
+  color: var(--primary);
+  border: 1px solid rgba(139, 200, 234, 0.4);
+  border-radius: 20px;
+  padding: 5px 14px;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.scene-note {
+  font-size: 13px;
+  color: var(--text-sub);
+  margin-left: 4px;
+}
