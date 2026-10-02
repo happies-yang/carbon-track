@@ -490,16 +490,22 @@ body {
   color: #fff;
 }
 
-/* 详情：配图在左、文字在右 */
+/* 详情：图片放大单独一行，文字另起一行 */
 .stage-detail-grid {
   display: grid;
-  grid-template-columns: minmax(0, 1fr) 1.6fr;
-  gap: 22px;
+  grid-template-columns: 1fr;
+  gap: 20px;
   margin-top: 4px;
+}
+
+.stage-img {
+  width: 100%;
 }
 
 .stage-img .img-fit {
   margin: 0;
+  width: 100%;
+  height: auto;
 }
 
 @media (max-width: 900px) {
