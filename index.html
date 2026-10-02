@@ -483,13 +483,13 @@
       detail.innerHTML = "";
       let imgHtml = "";
       if (stage.id === "exploration") {
-        imgHtml = "<img src='images/exploration.png' class='img-fit' alt='原油开采场景'>";
+        imgHtml = "<img src='images/exploration-legacy.png' class='img-fit' alt='原油开采场景'>";
       } else if (stage.id === "refining") {
-        imgHtml = "<img src='images/refining.png' class='img-fit' alt='炼油常减压蒸馏工艺'>";
+        imgHtml = "<img src='images/refining-legacy.png' class='img-fit' alt='炼油常减压蒸馏工艺'>";
       } else if (stage.id === "distribution") {
-        imgHtml = "<img src='images/distribution.png' class='img-fit' alt='成品油油罐车配送'>";
+        imgHtml = "<img src='images/distribution-legacy.png' class='img-fit' alt='成品油油罐车配送'>";
       } else if (stage.id === "combustion") {
-        imgHtml = "<img src='images/combustion.png' class='img-fit' alt='机动车终端燃烧与尾气排放'>";
+        imgHtml = "<img src='images/combustion-legacy.png' class='img-fit' alt='机动车终端燃烧与尾气排放'>";
       }
       detail.innerHTML =
         "<h3>" + stage.name + "（占全生命周期 " + stage.proportion + "%）</h3>" +
