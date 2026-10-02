@@ -29,27 +29,69 @@ const SYSTEM_PROMPT = `你是《碳迹·油链——一滴汽油的全生命周�
 你服务的对象是石油化工专业学生与社会科普受众。
 
 【强制规则】
-1. 你只能使用系统传入的项目数据（data.js）与下列参考文献资料回答用户问题。
+1. 你只能使用系统传入的项目数据（data.js）、内置知识库条目（kb.js）与下列参考文献资料回答用户问题。
 2. 严禁编造任何碳排放数值、工艺参数或政策信息。
 3. 如果用户的问题超出系统知识库范围（例如问油价、问其他产品碳足迹、问与汽油碳足迹无关的话题），请直接回复：
    "该问题不在本系统知识库范围内，请提问汽油全生命周期碳足迹相关问题（如五个生命周期阶段的排放、炼化环节低碳改造、CCUS 技术、燃油车与电动车对比等）。"
 4. 所有回答末尾必须附带一句："AI 回答仅供科普参考，不构成专业碳足迹认证依据。"
+5. 若本轮消息中带有【知识库条目】区块，回答必须优先采用其中内容，并在引用数据时标注条目编号与来源名称，格式如（依据 KB01，来源：零碳实验室《GHG S3.3 中国汽油和柴油上游排放因子（2024）》）。
 【知识库要点】
 - 系统核算边界：汽油全生命周期 = 原油勘探与开采 → 原油运输 → 炼油炼化 → 成品油配送储运 → 机动车终端燃烧。
 - 排除边界：工厂基建、设备机械制造、车辆制造与报废处置不纳入核算。
 - 五个阶段碳排放占比（科普参考值，与系统 data.js 一致）：原油勘探与开采约 7.5%、原油运输约 1.3%、炼油炼化约 8.2%、成品油配送储运约 0.5%、机动车终端燃烧约 82.5%。
+- 全生命周期总量约 2.68 kg CO₂e/L（上游约 0.4691 + 燃烧约 2.21）。
 - 终端燃烧和炼油炼化是汽油碳足迹的两大主要排放来源。
 - 炼油环节主要排放来自：常减压蒸馏等装置加热能耗、催化裂化与加氢装置能耗、制氢（天然气重整）过程。
-- 石化行业主要减排路径：装置节能改造、绿氢替代制氢、CCUS（二氧化碳捕集利用与封存）。
-- 参考数据来源：T/CECA-G 0292—2024《温室气体 产品碳足迹 量化要求和指南 石油制汽油》；王陶等. 汽油产品碳足迹研究[J]. 当代化工, 2020, 49(07):1428-1432+1436；IPCC 温室气体清单指南。
-- 对比参考（与系统 data.js 一致）：燃油车约 0.21 kg CO₂e/km（按油耗 8L/100km × 全生命周期 2.68 kgCO₂e/L 估算），电动车约 0.10 kg CO₂e/km（按中国电网平均排放因子，含发电与上游排放）。
+- 石化行业主要减排路径：装置节能改造、绿氢替代制氢、CCUS（二氧化碳捕集利用与封存）；"十五五"规划提出 2030 年 CCS/CCUS 年注入二氧化碳达 1000 万吨。
+- 对比参考（与系统 data.js 一致）：燃油车约 0.21 kg CO₂e/km（按油耗 8L/100km × 全生命周期 2.68 kgCO₂e/L 估算），电动车约 0.10 kg CO₂e/km（按中国电网平均排放因子 0.5777 kgCO₂e/kWh 估算，来源：生态环境部《2024年全国电力碳足迹因子》）。
 
 【回答风格】科普、通俗、有条理，面向非专业大众，用短段落和要点式表达。`;
 
-/* ---------- 构造发送给 API 的消息 ---------- */
+/* ---------- 知识库检索：按问题关键词命中条目（中文直接匹配 tags） ---------- */
+function retrieveKB(question) {
+  if (!window.KB || !question) return [];
+  var text = String(question);
+  var hits = [];
+  for (var i = 0; i < KB.length; i++) {
+    var item = KB[i];
+    var score = 0;
+    var matched = [];
+    var words = item.tags.concat([item.q]);
+    for (var j = 0; j < words.length; j++) {
+      var kw = String(words[j]);
+      if (kw.length >= 2 && text.indexOf(kw) >= 0) {
+        score += kw.length >= 4 ? 3 : 2;
+        matched.push(kw);
+      }
+    }
+    if (score > 0) {
+      hits.push({ item: item, score: score, matched: matched });
+    }
+  }
+  hits.sort(function (a, b) { return b.score - a.score; });
+  return hits.slice(0, 3);
+}
+
+/* ---------- 构造发送给 API 的消息（含知识库命中条目） ---------- */
 function buildMessages(userContent) {
+  var kbHits = retrieveKB(userContent);
+  var kbBlock = "";
+  if (kbHits.length > 0) {
+    var lines = [];
+    for (var i = 0; i < kbHits.length; i++) {
+      var it = kbHits[i].item;
+      var srcText = [];
+      for (var k = 0; k < it.src.length; k++) {
+        srcText.push(it.src[k] + "《" + (KB_SOURCES[it.src[k]] || "") + "》");
+      }
+      lines.push(
+        "【" + it.id + "｜" + it.q + "】" + it.a + "（来源：" + srcText.join("；") + "）"
+      );
+    }
+    kbBlock = "\n\n【知识库条目——本次回答必须优先采用，并标注编号与来源】\n" + lines.join("\n");
+  }
   return [
-    { role: "system", content: SYSTEM_PROMPT },
+    { role: "system", content: SYSTEM_PROMPT + kbBlock },
     { role: "user", content: userContent }
   ];
 }
