@@ -25,7 +25,11 @@ function renderDonut(elId) {
   chart.setOption({
     tooltip: {
       trigger: "item",
-      formatter: "{b}<br/>碳排放占比：{c}%"
+      formatter: (p) => {
+        const st = LCA_DATA.stages.find((s) => s.name === p.name);
+        const est = st && (st.id === "exploration" || st.id === "transport") ? "（估算拆分）" : "";
+        return p.name + "<br/>碳排放占比：" + p.value + "%" + est;
+      }
     },
     legend: {
       orient: "horizontal",
@@ -75,7 +79,7 @@ function renderStageBar(elId, stageId) {
     tooltip: {
       trigger: "axis",
       formatter: () =>
-        `${stage.name}<br/>碳排放量：约 ${stage.emission.toFixed(2)} kg CO₂e/L<br/>占全生命周期：${stage.proportion}%`
+        `${stage.name}<br/>碳排放量：约 ${stage.emission.toFixed(3)} kg CO₂e/L<br/>占全生命周期：${stage.proportion}%`
     },
     grid: { left: 60, right: 20, top: 40, bottom: 40 },
     xAxis: {
@@ -101,7 +105,7 @@ function renderStageBar(elId, stageId) {
         label: {
           show: true,
           position: "top",
-          formatter: `${stage.emission.toFixed(2)} kg CO₂e/L`,
+          formatter: `${stage.emission.toFixed(3)} kg CO₂e/L`,
           color: AXIS_TEXT,
           fontWeight: 600
         }
@@ -120,8 +124,15 @@ function renderFlow(elId) {
   const chart = echarts.init(el);
 
   const stages = LCA_DATA.stages;
+  const isEst = (i) => stages[i].id === "exploration" || stages[i].id === "transport";
   chart.setOption({
-    tooltip: { trigger: "axis" },
+    tooltip: {
+      trigger: "axis",
+      formatter: (params) => {
+        const i = params[0].dataIndex;
+        return stages[i].name + "<br/>碳排放量：约 " + stages[i].emission.toFixed(3) + " kg CO₂e/L" + (isEst(i) ? "（估算拆分）" : "") + "<br/>占全生命周期：" + stages[i].proportion + "%";
+      }
+    },
     grid: { left: 50, right: 20, top: 30, bottom: 50 },
     xAxis: {
       type: "category",
@@ -225,7 +236,7 @@ function renderTrend(elId) {
       trigger: "axis",
       formatter: (params) => {
         const s = stages[params[0].dataIndex];
-        return `${s.name}<br/>碳排放量：约 ${s.emission.toFixed(2)} kg CO₂e/L<br/>占全生命周期：${s.proportion}%`;
+        return `${s.name}<br/>碳排放量：约 ${s.emission.toFixed(3)} kg CO₂e/L<br/>占全生命周期：${s.proportion}%`;
       }
     },
     grid: { left: 60, right: 30, top: 40, bottom: 50 },
@@ -253,7 +264,7 @@ function renderTrend(elId) {
         label: {
           show: true,
           position: "top",
-          formatter: (p) => stages[p.dataIndex].emission.toFixed(2),
+          formatter: (p) => stages[p.dataIndex].emission.toFixed(3),
           color: AXIS_TEXT,
           fontWeight: 600
         }

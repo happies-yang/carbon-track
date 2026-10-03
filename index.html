@@ -35,6 +35,7 @@
 
       <!-- 序幕 · Hero -->
       <div class="hero story-hero">
+        <div class="hero-tag">2026 第十四届全国大学生数字媒体科技作品及创意竞赛 · 指定命题：科技+创意，讲好中国故事</div>
         <h1>一滴汽油的中国之旅</h1>
         <p class="hero-sub">
           从地下油田到加油站，一滴汽油走过的每一步，都是中国能源工业与双碳转型的时代注脚。
@@ -47,6 +48,18 @@
         <div class="hero-actions">
           <button class="btn btn-primary" id="btnAbout">关于本作品</button>
           <a class="btn btn-ghost" href="#act-start">开始旅程 ↓</a>
+          <button class="btn btn-ghost" onclick="switchView('ai')">体验 AI 助手 →</button>
+        </div>
+      </div>
+
+      <!-- 首屏 · 中国时间轴（四节点） -->
+      <div class="china-timeline">
+        <div class="china-timeline-title">一条中国的碳足迹时间轴</div>
+        <div class="turn-timeline">
+          <div class="turn-node"><span class="turn-year">1960s</span><p>大庆油田开发，甩掉"贫油国"帽子</p></div>
+          <div class="turn-node"><span class="turn-year">2020</span><p>中国宣布碳达峰、碳中和"3060"目标</p></div>
+          <div class="turn-node"><span class="turn-year">2024</span><p>GB/T 24067 产品碳足迹核算通则落地</p></div>
+          <div class="turn-node"><span class="turn-year">今天</span><p>一滴汽油的碳账，算得清、看得见</p></div>
         </div>
       </div>
 
@@ -57,6 +70,9 @@
         <p class="act-lead">
           它从地下数千米的油藏出发，经管道与油轮穿越山海，在千万吨级炼厂里历经蒸馏与催化，
           再由油罐车送到你身边——最后，在发动机里完成一次燃烧，把能量交给道路，把二氧化碳交给天空。
+        </p>
+        <p class="act-lead">
+          很长时间里，我们只知道汽车会排碳，却说不清这滴油从地下到油箱究竟排了多少。
         </p>
         <p class="act-lead">
           这五个环节，横跨数千公里，牵动中国能源版图，也写下了一段"从石油到碳足迹"的时代叙事。
@@ -71,28 +87,28 @@
           <div class="act-body">
             <h3>从"贫油国"到大油田</h3>
             <p>六十多年前，中国曾被断言"贫油"。大庆油田的开发让共和国甩掉了这顶帽子；此后胜利、塔里木、海上油田相继建成，
-              中国成长为世界第二大炼油国。一滴原油的旅程，从这里开始。</p>
+              中国成长为世界第二大炼油国（炼油产能居全球第二，数据来源：国家能源局历年统计）。一滴原油的旅程，从这里开始。</p>
             <div class="mini-stat">
-              <span class="mini-num">0.20 kg CO₂e/L</span> 原油开采阶段碳足迹 · 占全生命周期 <b>7.5%</b>
+              <span class="mini-num">0.196 kg CO₂e/L</span> 原油开采阶段碳足迹（估算拆分） · 占全生命周期 <b>7.3%</b>
             </div>
-            <button class="btn btn-sm" data-source="原油开采|零碳实验室《中国汽油和柴油上游排放因子》GHG S3.3（2024）：原油开采排放因子（含甲烷逸散、开采能耗）；IPCC《2006 国家温室气体清单指南》">查看数据来源</button>
+            <button class="btn btn-sm" data-source="原油开采|零碳实验室《中国汽油和柴油上游排放因子》GHG S3.3（2024）；中国石油大学《中国国内石油生产碳排放强度》报告（2023）。说明：来源报告将原油生产与运输合并核算（井口—炼厂入口，318.18 kgCO₂e/t 汽油口径），本作品按原油运输环节能耗占比约 16% 估算拆分为开采与运输两阶段，本环节为估算值">查看数据来源</button>
           </div>
         </div>
       </div>
 
-      <!-- 第二幕 · 路上的中国 -->
+      <!-- 第二幕 · 流动的中国 -->
       <div class="card act-card">
-        <div class="act-tag">第二幕 · 路上的中国</div>
+        <div class="act-tag">第二幕 · 流动的中国</div>
         <div class="act-grid">
           <div class="act-img"><img src="images/refining.png" class="img-fit" alt="炼油常减压蒸馏工艺" /></div>
           <div class="act-body">
             <h3>能源动脉与千万吨级炼厂</h3>
             <p>中哈原油管道、海上油轮、纵横的管网——原油跨越数千公里来到炼厂；常减压蒸馏、催化裂化、重整，
-              中国炼化工业用世界级的规模，把原油变成汽油。这是"路上的中国"：运输 + 炼化，占碳足迹不到一成，却是故事里不可缺的一环。</p>
+              中国炼化工业用世界级的规模，把原油变成汽油。这是"流动的中国"：运输 + 炼化，占碳足迹不到一成，却是故事里不可缺的一环。</p>
             <div class="mini-stat">
-              原油运输 <b>0.04 kg · 1.3%</b> ｜ 炼油炼化 <b>0.22 kg · 8.2%</b> kg CO₂e/L
+              原油运输 <b>0.039 kg · 1.5%</b>（估算拆分） ｜ 炼油炼化 <b>0.220 kg · 8.2%</b> kg CO₂e/L
             </div>
-            <button class="btn btn-sm" data-source="原油运输|零碳实验室《中国汽油和柴油上游排放因子》GHG S3.3（2024）：运输环节排放因子（管道/海运能耗）；炼油炼化|零碳实验室 GHG S3.3（2024）炼化排放因子（加热能耗、制氢排放）">查看数据来源</button>
+            <button class="btn btn-sm" data-source="原油运输|零碳实验室《中国汽油和柴油上游排放因子》GHG S3.3（2024）：运输环节排放因子（管道/海运能耗）。说明：来源报告将原油生产与运输合并核算（318.18 kgCO₂e/t 汽油口径），本作品按原油运输环节能耗占比约 16% 估算拆分，本环节为估算值；炼油炼化|零碳实验室 GHG S3.3（2024）炼化排放因子（加热能耗、制氢排放）">查看数据来源</button>
           </div>
         </div>
       </div>
@@ -104,12 +120,29 @@
           <div class="act-img"><img src="images/combustion.png" class="img-fit" alt="机动车终端燃烧与尾气排放" /></div>
           <div class="act-body">
             <h3>保有量全球第一的"燃烧的时代"</h3>
-            <p>中国机动车保有量居世界前列，数亿辆汽车每天在路上燃烧汽油。终端燃烧贡献了这滴油 <b>82.5%</b> 的碳足迹——
+            <p>中国机动车保有量居世界前列（保有量全球第一，数据来源：公安部 2025 年统计），数亿辆汽车每天在路上燃烧汽油。终端燃烧贡献了这滴油 <b>82.5%</b> 的碳足迹——
               它既是故事的高潮，也是减排的主战场。</p>
             <div class="mini-stat">
-              <span class="mini-num">2.21 kg CO₂e/L</span> 终端燃烧阶段碳足迹 · 占全生命周期 <b>82.5%</b>
+              <span class="mini-num">2.210 kg CO₂e/L</span> 终端燃烧阶段碳足迹 · 占全生命周期 <b>82.5%</b>
             </div>
+            <p class="act-lead" style="font-size:13px; color:#5a6a7e;">燃烧的时代，也是转型的时代。当新能源车驶上街头，当炼厂开始捕集二氧化碳，这滴油的下一程，正在被重新书写。</p>
             <button class="btn btn-sm" data-source="终端燃烧|IPCC 2006 温室气体清单指南：汽油燃烧 CO₂ 排放因子（约 2.21 kg CO₂e/L）；上海市生态环境局《上海市温室气体排放核算和报告指南》交叉验证（差异<3%）">查看数据来源</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- 第四幕 · 减得下的中国 -->
+      <div class="card act-card act-reduce">
+        <div class="act-tag">第四幕 · 减得下的中国</div>
+        <div class="act-grid">
+          <div class="act-img"><img src="images/ccus.png" class="img-fit" alt="CCUS 碳捕集与地下封存技术" /></div>
+          <div class="act-body">
+            <h3>中国科技，让碳"减得下"</h3>
+            <p>面对这两大排放来源，中国用自主科技作答：炼化能效标杆改造让装置能耗持续下降；国家发展改革委等五部门《炼油行业节能降碳专项行动计划》落地，为炼厂划定降碳路线；CCUS 把二氧化碳捕集并封存回地下；绿氢逐步替代天然气制氢，从源头减少制氢环节碳排放。这滴油的碳足迹，正在被中国人自己改写。</p>
+            <div class="mini-stat">
+              <b>炼化能效改造</b> ｜ <b>节能降碳专项行动</b> ｜ <b>CCUS 碳捕集</b> ｜ <b>绿氢替代制氢</b>
+            </div>
+            <button class="btn btn-sm" data-source="减排科技|国家发展改革委等《炼油行业节能降碳专项行动计划》（2024）；中国石油和化学工业联合会行业能效领跑者；CCUS 与绿氢替代制氢（见 AI 助手知识库）">查看数据来源</button>
           </div>
         </div>
       </div>
@@ -220,7 +253,7 @@
 
       <div class="card compare-entry mb-36">
         <div class="card-title">延伸：燃油车 vs 电动车</div>
-        <p>按中国电网平均排放因子（生态环境部 2024 年电力碳足迹因子 0.5777 kgCO₂e/kWh）估算，电动车每公里碳排放约为燃油车的一半，且随电网清洁化优势持续扩大。</p>
+        <p>按电动车百公里电耗 15 kWh（含充电损耗）× 生态环境部 2024 年电力碳足迹因子 0.5777 kgCO₂e/kWh 估算，电动车每公里碳排放约为燃油车的四成，且随电网清洁化优势持续扩大。</p>
         <button class="btn btn-primary" onclick="switchView('compare')">查看对比 →</button>
       </div>
 
@@ -244,18 +277,18 @@
         <div class="card">
           <div class="card-title">柱状对比</div>
           <div id="compareChart" class="chart" style="height:380px"></div>
-          <p class="card-note">⚠️ 电动车按生态环境部《关于发布2024年电力碳足迹因子数据的公告》全国电力平均碳足迹因子 0.5777 kgCO₂e/kWh 估算（含发电与上游排放），数据为科普参考值。</p>
+          <p class="card-note">⚠️ 电动车按百公里电耗 15 kWh（含充电损耗）× 全国电力平均碳足迹因子 0.5777 kgCO₂e/kWh 估算（含发电与上游排放）；两者口径一致，均只含燃料/电力上游与使用阶段排放，不含整车及动力电池制造环节。数据为科普参考值。</p>
         </div>
         <div class="card">
           <div class="card-title">对比结论</div>
           <div class="conclusion-box">
-            <p><b>核心结论：</b>每行驶 1 公里，电动车（约 <span class="hl-amber">0.10</span> kg CO₂e）碳排放约为燃油车（约 <span class="hl-amber">0.21</span> kg CO₂e）的<b>一半</b>。</p>
+            <p><b>核心结论：</b>每行驶 1 公里，电动车（约 <span class="hl-amber">0.09</span> kg CO₂e）碳排放约为燃油车（约 <span class="hl-amber">0.21</span> kg CO₂e）的<b>四成</b>。</p>
             <p style="margin-top:6px"><b>为什么：</b>燃油车的碳排放主要集中于<b>燃烧阶段</b>（约占全生命周期 82.5%），属"化石燃料直接排放"，几乎无法削减；电动车的碳排放主要集中于<b>发电阶段</b>，随着电网清洁化（风光水电占比提升）单位发电碳排放持续下降，电动车的优势会进一步扩大。</p>
           </div>
           <div class="card-title" style="margin-top:18px">对比解读</div>
           <ul class="plain-list small-list">
             <li><b>燃油车（汽油）</b>：每公里约 0.21 kg CO₂e，按油耗 8L/100km × 全生命周期 2.68 kgCO₂e/L 估算，包含燃料上游（开采、炼化）与终端燃烧排放，其中燃烧环节占大头。</li>
-            <li><b>电动车（电网平均）</b>：每公里约 0.10 kg CO₂e，包含发电环节与上游排放；随电网清洁化（风光水电占比提升），其排放优势还会扩大。</li>
+            <li><b>电动车（电网平均）</b>：每公里约 0.09 kg CO₂e，按百公里电耗 15 kWh（含充电损耗）× 0.5777 kgCO₂e/kWh 估算（约 0.086 ≈ 0.09），包含发电环节与上游排放；随电网清洁化（风光水电占比提升），其排放优势还会扩大。</li>
             <li>本对比为<b>科普参考</b>，实际数值随车型、路况、电网结构变化；不构成产品碳足迹认证结论。电动车的补能便利性与长途续航目前仍弱于燃油车，购车需结合使用场景综合判断。</li>
           </ul>
         </div>
@@ -359,7 +392,7 @@
         <p><b>作品名称：</b>碳迹·油链——一滴汽油的中国之旅 · 全生命周期碳足迹智能可视化系统</p>
         <p><b>参赛赛道：</b>2026 第十四届全国大学生数字媒体科技作品及创意竞赛 · 指定命题【科技+创意，讲好中国故事】</p>
         <p><b>团队：</b>甘肃有色冶金职业技术学院 —— 杨德运（石油化工技术）、孟玉如、乔嘉悦（应用化工）；指导教师：陈卫东、陈艳丽</p>
-        <p><b>作品简介：</b>以"一滴汽油"为叙事线索，讲述中国从能源大国迈向绿色强国的转型故事——从世界第二大炼油国的产业坐标，到"3060"双碳承诺，再到碳足迹核算标准的中国落地，用可交互数据可视化与 AI 科普助手，让"双碳"目标可知、可感、可参与。</p>
+        <p><b>作品简介：</b>以"一滴汽油"为叙事线索，讲述中国从能源大国迈向绿色强国的转型故事——从世界第二大炼油国（国家能源局统计）的产业坐标，到"3060"双碳承诺，再到碳足迹核算标准的中国落地，用可交互数据可视化与 AI 科普助手，让"双碳"目标可知、可感、可参与。</p>
         <p style="margin-top:10px"><b>中国故事视角：</b>一滴油的地下之旅、路上之旅、燃烧之旅，与中国能源工业的崛起同频；每一次加油、每一次出行选择，都在为中国双碳故事写下自己的那一笔。</p>
       </div>
     </div>
@@ -367,6 +400,7 @@
 
   <!-- 数据与逻辑 -->
   <script src="js/data.js"></script>
+  <script src="js/kb.js"></script>
   <script src="js/charts.js"></script>
   <script src="js/ai.js"></script>
   <script>
@@ -435,6 +469,12 @@
         "<p><b>环节：</b>" + name + "</p>" +
         "<p><b>数据来源：</b>" + source + "</p>" +
         "<p><b>核算方法：</b>排放因子法（活动数据 × 排放因子），依据 GB/T 24067-2024《温室气体 产品碳足迹 量化要求和指南》；燃烧环节另经上海市生态环境局《上海市温室气体排放核算和报告指南》交叉验证（差异 &lt;3%）。</p>" +
+        "<div class='src-links'><p><b>官网溯源（点击可验证）：</b></p>" +
+        "<a href='https://www.ipcc-nggip.iges.or.jp/' target='_blank' rel='noopener'>IPCC 温室气体清单指南</a>" +
+        "<a href='https://www.mee.gov.cn/' target='_blank' rel='noopener'>生态环境部（电力碳足迹因子 / 温室气体排放因子数据库）</a>" +
+        "<a href='https://www.ndrc.gov.cn/' target='_blank' rel='noopener'>国家发展改革委（《炼油行业节能降碳专项行动计划》）</a>" +
+        "<a href='https://openstd.samr.gov.cn/' target='_blank' rel='noopener'>国家标准全文公开系统（GB/T 24067-2024）</a>" +
+        "</div>" +
         "<p class='card-note'>⚠️ 本系统数据为科普参考值，来源为公开标准与文献；正式用途请以权威机构发布数据为准。</p>";
       document.getElementById("sourceModal").style.display = "flex";
     }
@@ -506,7 +546,7 @@
         "<h4>环节说明</h4><p>" + stage.description + "</p>" +
         "<h4>关键要点</h4><ul class='plain-list'>" +
         stage.keyPoints.map((k) => "<li>" + k + "</li>").join("") + "</ul>" +
-        "<div class='source-row'><span>碳排放量：约 " + stage.emission.toFixed(2) + " kg CO₂e/L</span>" +
+        "<div class='source-row'><span>碳排放量：约 " + stage.emission.toFixed(3) + " kg CO₂e/L</span>" +
         "<button class='btn btn-sm' data-source='" + stage.name + "|" + stage.source + "'>查看数据来源</button></div>" +
         "<div class='source-row'><span>想知道这个环节怎么减排？</span>" +
         "<button class='btn btn-sm btn-ghost' data-ai-suggest='" + stage.id + "'>AI 减排建议</button></div>" +
